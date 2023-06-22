@@ -5,6 +5,11 @@ to start:
 -  clone the repo
 -  navigate in backend folder
 -  run npm i
+-  in the backend folder, create a folder named data and add a users.json file
+-  inside users.json file add the following:
+  {
+    "users": []
+  }
 -  run tsc --watch
 -  run npm start ( server starts on port 5000 )
 
