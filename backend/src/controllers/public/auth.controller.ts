@@ -25,8 +25,9 @@ const register = async (req: Request, res: Response): Promise<Response> => {
     username,
     password: hashedPassword,
   };
+  const token: string = generateToken(newUser);
   addNewUserToFile(newUser);
-  return res.status(200).json({ message: "user added successfully" });
+  return res.status(200).json({ token });
 };
 
 const login = async (req: Request, res: Response) => {
