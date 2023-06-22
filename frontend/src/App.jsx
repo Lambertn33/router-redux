@@ -1,8 +1,11 @@
 import React from 'react'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import AuthPage from './pages/auth/AuthPage'
 import './App.css'
 
 export default function App() {
-  return (
-    <h2>hello</h2>
-  )
+  const router = createBrowserRouter([
+    { path: '/', element: <AuthPage/> }
+  ])
+  return <RouterProvider router={router} />
 }
