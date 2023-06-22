@@ -8,4 +8,8 @@ const router = Router();
 
 router.get('/', checkToken, usersController.getUsers);
 
+router.get('/:id', checkToken, usersController.getUser);
+
+router.get('/:id/posts', checkToken, usersController.getUserPosts);
+
 export default router;
