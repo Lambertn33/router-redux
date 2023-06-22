@@ -1,5 +1,5 @@
 import fs from "fs";
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 import { User as UserInterface } from "../interfaces/auth.interface";
 
 const filePath = "./data/users.json";
@@ -30,6 +30,6 @@ export const checkUserExistenceInFile = async (
 };
 
 export const generateToken = (user: UserInterface) => {
-  const secretKey: string = "randomKey";
-  return jwt.sign({ user }, secretKey, { expiresIn: "2h" });
-};
+  const secretKey: string = 'randomKey';
+  return jwt.sign({ user }, secretKey, { expiresIn: '2h' });
+}

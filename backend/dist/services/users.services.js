@@ -32,7 +32,7 @@ const checkUserExistenceInFile = (username) => __awaiter(void 0, void 0, void 0,
 });
 exports.checkUserExistenceInFile = checkUserExistenceInFile;
 const generateToken = (user) => {
-    const secretKey = "randomKey";
-    return jsonwebtoken_1.default.sign({ user }, secretKey, { expiresIn: "2h" });
+    const secretKey = 'randomKey';
+    return jsonwebtoken_1.default.sign({ user }, secretKey, { expiresIn: '2h' });
 };
 exports.generateToken = generateToken;
