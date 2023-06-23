@@ -27,7 +27,7 @@ export default function UsersPage() {
         <React.Fragment>
           <h4 className="text-center mt-4">Users List</h4>
           {users.map((user) => (
-            <MDBCol md="4 pb-4 pt-4">
+            <MDBCol md="4 pb-4 pt-4" key={user.id}>
               <UserItem user={user} />
             </MDBCol>
           ))}

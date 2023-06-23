@@ -2,8 +2,13 @@
     padding: 1rem !important;
 }
 
+.navbarBrand {
+    margin: 0 !important;
+}
+
 .navbar {
     display: flex;
+    margin-left: 2rem;
     gap: 1rem;
 }
 .navbar li a {

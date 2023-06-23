@@ -8,16 +8,17 @@ import {
   MDBNavbarToggler,
   MDBNavbarBrand,
   MDBCollapse,
+  MDBBtn
 } from "mdb-react-ui-kit";
-import { NavLink } from "react-router-dom";
+import { Form, NavLink } from "react-router-dom";
 import styles from './Navbar.module.css'
 
-export default function Navbar() {
+export default function Navbar({ user }) {
   return (
     <MDBNavbar expand="lg" dark bgColor="primary" className={styles.nav}>
       <MDBContainer fluid>
-        <MDBNavbarBrand>
-          <></>
+        <MDBNavbarBrand className={styles.navbarBrand}>
+          {user}
         </MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
@@ -37,6 +38,9 @@ export default function Navbar() {
                 <NavLink to="/home/users">Users List</NavLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
+          <Form action="/home/logout" method="post">
+          <MDBBtn color="success">Logout</MDBBtn>
+          </Form>
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
