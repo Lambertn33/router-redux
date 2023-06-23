@@ -10,14 +10,9 @@ import {
   MDBModalFooter,
 } from "mdb-react-ui-kit";
 
-export default function UserPosts() {
-  const [scrollableModal, setScrollableModal] = useState(false);
+export default function UserPosts({scrollableModal, setScrollableModal}) {
   return (
     <>
-      <MDBBtn onClick={() => setScrollableModal(!scrollableModal)}>
-        LAUNCH DEMO MODAL
-      </MDBBtn>
-
       <MDBModal
         show={scrollableModal}
         setShow={setScrollableModal}
@@ -27,11 +22,11 @@ export default function UserPosts() {
           <MDBModalContent>
             <MDBModalHeader>
               <MDBModalTitle>Modal title</MDBModalTitle>
-              <MDBBtn
+              {/* <MDBBtn
                 className="btn-close"
                 color="none"
                 onClick={() => setScrollableModal(!scrollableModal)}
-              ></MDBBtn>
+              ></MDBBtn> */}
             </MDBModalHeader>
             <MDBModalBody>
               <p>
@@ -132,7 +127,6 @@ export default function UserPosts() {
               >
                 Close
               </MDBBtn>
-              <MDBBtn>Save changes</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

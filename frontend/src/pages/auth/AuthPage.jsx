@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../../components/Card";
-import MainWrapper from '../../components/MainWrapper';
+import MainWrapper from "../../components/MainWrapper";
 import { MDBInput, MDBBtn, MDBCol } from "mdb-react-ui-kit";
 import {
   Form,
@@ -8,7 +8,6 @@ import {
   useActionData,
   Link,
   json,
-  redirect,
 } from "react-router-dom";
 
 import styles from "./AuthPage.module.css";
@@ -16,7 +15,8 @@ import handlerAuthenticate from "../../services/auth/auth.services";
 
 export default function AuthPage() {
   const [searchParams] = useSearchParams();
-  const isLogin = searchParams.get("mode") && searchParams.get("mode") === "login";
+  const isLogin =
+    searchParams.get("mode") && searchParams.get("mode") === "login";
   const errorData = useActionData();
 
   return (
@@ -25,7 +25,9 @@ export default function AuthPage() {
         <Card>
           <h3>Welcome to users app</h3>
           <h5>{isLogin ? "Login" : "Register"}</h5>
-          {errorData &&<span className={`text-danger ${styles.error}`}>{errorData}</span>}
+          {errorData && (
+            <span className={`text-danger ${styles.error}`}>{errorData}</span>
+          )}
           <Form method="post">
             <MDBInput
               className="mb-4"
@@ -77,7 +79,7 @@ export const action = async ({ request }) => {
     const resData = response.data;
     const token = resData.token;
     localStorage.setItem("token", token);
-    return redirect("/users");
+    window.location.href = "/users";
   } catch (error) {
     return error.response.data.message;
   }
