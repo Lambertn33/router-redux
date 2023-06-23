@@ -1,0 +1,22 @@
+.item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+button {
+    margin: 1rem auto;
+}
+
+a {
+    font-size: 14px;
+    color: #fff;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+a:hover {
+    font-size: 17px;
+    font-weight: 800;
+    transition: .4s;
+}
