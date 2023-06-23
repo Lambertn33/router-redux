@@ -5,17 +5,20 @@ import {
   MDBIcon,
   MDBNavbarNav,
   MDBNavbarItem,
-  MDBNavbarLink,
   MDBNavbarToggler,
   MDBNavbarBrand,
   MDBCollapse,
 } from "mdb-react-ui-kit";
+import { NavLink } from "react-router-dom";
+import styles from './Navbar.module.css'
 
 export default function Navbar() {
   return (
-    <MDBNavbar expand="lg" dark bgColor="primary">
+    <MDBNavbar expand="lg" dark bgColor="primary" className={styles.nav}>
       <MDBContainer fluid>
-        <MDBNavbarBrand href="#">Navbar</MDBNavbarBrand>
+        <MDBNavbarBrand>
+          <></>
+        </MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           data-target="#navbarColor02"
@@ -26,20 +29,12 @@ export default function Navbar() {
           <MDBIcon icon="bars" fas />
         </MDBNavbarToggler>
         <MDBCollapse navbar>
-          <MDBNavbarNav className="me-auto mb-2 mb-lg-0">
-            <MDBNavbarItem className="active">
-              <MDBNavbarLink aria-current="page" href="#">
-                Home
-              </MDBNavbarLink>
+          <MDBNavbarNav className={`${styles.navbar} me-auto mb-2 mb-lg-0`}>
+            <MDBNavbarItem>
+                <NavLink to="/home">Home</NavLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="#">Features</MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href="#">Pricing</MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href="#">About</MDBNavbarLink>
+                <NavLink to="/home/users">Users List</NavLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>

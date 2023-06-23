@@ -11,8 +11,10 @@ export default function UsersPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUsers);
-  }, [dispatch]);
+    if (users.length === 0) {
+      dispatch(fetchUsers);
+    }
+  }, [dispatch, users.length]);
   return (
     <MainLayout>
       {isLoading ? (
