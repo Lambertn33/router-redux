@@ -3,20 +3,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../store/users/users-slice";
 
 import UserItem from "../../components/UserItem";
-import MainLayout from "../../components/MainLayout";
 import { MDBCol, MDBSpinner } from "mdb-react-ui-kit";
+import MainWrapper from "../../components/MainWrapper";
+
+import { authActions } from "../../store/auth/auth-slice";
+import { returnUserFromToken } from "../../util/auth";
 
 export default function UsersPage() {
   const { isLoading, users } = useSelector((state) => state.users);
+  const authenticatedUser = returnUserFromToken();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(authActions.login({ user: authenticatedUser }))
     if (users.length === 0) {
       dispatch(fetchUsers);
     }
-  }, [dispatch, users.length]);
+  }, [dispatch, users.length, authenticatedUser]);
   return (
-    <MainLayout>
+    <MainWrapper>
       {isLoading ? (
         <div className="d-flex align-items-center justify-content-center">
           <MDBSpinner role="status">
@@ -33,6 +38,6 @@ export default function UsersPage() {
           ))}
         </React.Fragment>
       )}
-    </MainLayout>
+    </MainWrapper>
   );
 }

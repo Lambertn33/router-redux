@@ -7,16 +7,20 @@
 button {
     margin: 1rem auto;
 }
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+}
 
 a {
-    font-size: 14px;
-    color: #fff;
+    font-size: 0.875rem;
     margin-top: 1rem;
     font-weight: 500;
 }
 
 a:hover {
-    font-size: 17px;
+    font-size: 1rem;
     font-weight: 800;
     transition: .4s;
 }

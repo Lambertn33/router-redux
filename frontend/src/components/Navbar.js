@@ -8,17 +8,28 @@ import {
   MDBNavbarToggler,
   MDBNavbarBrand,
   MDBCollapse,
-  MDBBtn
+  MDBBtn,
 } from "mdb-react-ui-kit";
-import { Form, NavLink } from "react-router-dom";
-import styles from './Navbar.module.css'
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../store/auth/auth-slice";
 
-export default function Navbar({ user }) {
+import styles from "./Navbar.module.css";
+
+export default function Navbar() {
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch(authActions.logout());
+    navigate("/");
+  };
   return (
     <MDBNavbar expand="lg" dark bgColor="primary" className={styles.nav}>
       <MDBContainer fluid>
         <MDBNavbarBrand className={styles.navbarBrand}>
-          {user}
+          {isAuthenticated ? <>{user}</> : <>Welcome</>}
         </MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
@@ -31,16 +42,25 @@ export default function Navbar({ user }) {
         </MDBNavbarToggler>
         <MDBCollapse navbar>
           <MDBNavbarNav className={`${styles.navbar} me-auto mb-2 mb-lg-0`}>
+            {!isAuthenticated && (
+              <MDBNavbarItem>
+                <NavLink to="/">Authenticate</NavLink>
+              </MDBNavbarItem>
+            )}
             <MDBNavbarItem>
-                <NavLink to="/home">Home</NavLink>
+              <NavLink to="/about">About us</NavLink>
             </MDBNavbarItem>
-            <MDBNavbarItem>
-                <NavLink to="/home/users">Users List</NavLink>
-            </MDBNavbarItem>
+            {isAuthenticated && (
+              <MDBNavbarItem>
+                <NavLink to="/users">Users List</NavLink>
+              </MDBNavbarItem>
+            )}
           </MDBNavbarNav>
-          <Form action="/home/logout" method="post">
-          <MDBBtn color="success">Logout</MDBBtn>
-          </Form>
+          {isAuthenticated && (
+            <MDBBtn color="success" onClick={logout}>
+              Logout
+            </MDBBtn>
+          )}
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
 import styles from "./UserItem.module.css";
-import { MDBCardTitle, MDBCardText, MDBIcon } from "mdb-react-ui-kit";
+import { MDBCardTitle, MDBCardText, MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 
 export default function UserItem({ user }) {
   return (
@@ -22,8 +22,9 @@ export default function UserItem({ user }) {
           {user.address.street} - {user.address.city}
         </MDBCardText>
       </div>
-      <div>
-        <Link to="">View More</Link>
+      <div className={styles.actions}>
+        <Link to="">View Details</Link>
+        <MDBBtn>View posts</MDBBtn>
       </div>
     </Card>
   );

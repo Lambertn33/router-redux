@@ -1,10 +1,12 @@
 import React from "react";
-import { MDBContainer, MDBRow } from "mdb-react-ui-kit";
+import Navbar from "./Navbar";
+import { Outlet } from "react-router-dom";
 
-export default function MainLayout({ children }) {
+export default function MainLayout() {
   return (
-    <MDBContainer>
-      <MDBRow>{children}</MDBRow>
-    </MDBContainer>
+    <>
+      <Navbar />
+      <Outlet />
+    </>
   );
 }

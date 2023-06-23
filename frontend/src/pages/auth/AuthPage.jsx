@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../../components/Card";
-import MainLayout from "../../components/MainLayout";
+import MainWrapper from '../../components/MainWrapper';
 import { MDBInput, MDBBtn, MDBCol } from "mdb-react-ui-kit";
 import {
   Form,
@@ -20,7 +20,7 @@ export default function AuthPage() {
   const errorData = useActionData();
 
   return (
-    <MainLayout>
+    <MainWrapper>
       <MDBCol md="4" center className={styles.card}>
         <Card>
           <h3>Welcome to users app</h3>
@@ -55,7 +55,7 @@ export default function AuthPage() {
           </Form>
         </Card>
       </MDBCol>
-    </MainLayout>
+    </MainWrapper>
   );
 }
 
