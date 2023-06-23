@@ -16,17 +16,20 @@ export default function UsersPage() {
   return (
     <MainLayout>
       {isLoading ? (
-        <div className="d-flex justify-content-center">
+        <div className="d-flex align-items-center justify-content-center">
           <MDBSpinner role="status">
             <span className="visually-hidden">Loading...</span>
           </MDBSpinner>
         </div>
       ) : (
-        users.map((user) => (
-          <MDBCol md="4 pb-4">
-            <UserItem user={user} />
-          </MDBCol>
-        ))
+        <React.Fragment>
+          <h4 className="text-center mt-4">Users List</h4>
+          {users.map((user) => (
+            <MDBCol md="4 pb-4 pt-4">
+              <UserItem user={user} />
+            </MDBCol>
+          ))}
+        </React.Fragment>
       )}
     </MainLayout>
   );
