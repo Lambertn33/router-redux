@@ -2,22 +2,30 @@ import React from "react";
 import Card from "../../components/Card";
 import MainLayout from "../../components/MainLayout";
 import { MDBInput, MDBBtn, MDBCol } from "mdb-react-ui-kit";
-import { Form, useSearchParams, useActionData, Link, json, redirect } from "react-router-dom";
+import {
+  Form,
+  useSearchParams,
+  useActionData,
+  Link,
+  json,
+  redirect,
+} from "react-router-dom";
 
 import styles from "./AuthPage.module.css";
 import handlerAuthenticate from "../../services/auth/auth.services";
 
 export default function AuthPage() {
   const [searchParams] = useSearchParams();
-  const isLogin = searchParams.get("mode") === "login";
+  const isLogin = searchParams.get("mode") && searchParams.get("mode") === "login";
   const errorData = useActionData();
 
   return (
     <MainLayout>
       <MDBCol md="4" center className={styles.card}>
         <Card>
-          <h4>{isLogin ? "Login" : "Register"}</h4>
-          { errorData && errorData.message && (<span>{ errorData.message }</span>) }
+          <h3>Welcome to users app</h3>
+          <h5>{isLogin ? "Login" : "Register"}</h5>
+          {errorData &&<span className={`text-danger ${styles.error}`}>{errorData}</span>}
           <Form method="post">
             <MDBInput
               className="mb-4"
@@ -53,7 +61,7 @@ export default function AuthPage() {
 
 export const action = async ({ request }) => {
   const searchParams = new URL(request.url).searchParams;
-  const mode = searchParams.get("mode") || "login";
+  const mode = searchParams.get("mode") || "register";
   if (mode !== "login" && mode !== "register") {
     throw json({ message: "Unsupported mode." }, { status: 422 });
   }
@@ -64,14 +72,13 @@ export const action = async ({ request }) => {
     password: data.get("password"),
   };
 
-  const response = await handlerAuthenticate(authData, mode);
-  if (response.status === 400 || response.status === 404) {
-    console.log(response.status);
-    return response;
+  try {
+    const response = await handlerAuthenticate(authData, mode);
+    const resData = response.data;
+    const token = resData.token;
+    localStorage.setItem("token", token);
+    return redirect("/users");
+  } catch (error) {
+    return error.response.data.message;
   }
-
-  const resData = response.data;
-  const token = resData.token;
-  localStorage.setItem("token", token);
-  return;
 };
