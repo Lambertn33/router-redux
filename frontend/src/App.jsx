@@ -3,8 +3,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AuthPage, { action as authAction } from "./pages/auth/AuthPage";
 import UsersPage from "./pages/users/UsersPage";
 import Home from "./pages/Home";
-import { checkAuthLoader } from "./util/auth";
 import Error from "./pages/Error";
+import { checkAuthLoader } from "./util/auth";
 import MainLayout from "./components/MainLayout";
 import "./App.css";
 

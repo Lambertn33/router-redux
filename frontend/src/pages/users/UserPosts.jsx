@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
   MDBBtn,
   MDBModal,
@@ -8,9 +8,24 @@ import {
   MDBModalTitle,
   MDBModalBody,
   MDBModalFooter,
+  MDBSpinner,
 } from "mdb-react-ui-kit";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserPosts } from "../../store/users/users-slice";
+import Spinner from "../../components/Spinner";
 
-export default function UserPosts({scrollableModal, setScrollableModal}) {
+export default function UserPosts({
+  user,
+  scrollableModal,
+  setScrollableModal,
+}) {
+
+  const { isLoadingPosts, userPosts } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUserPosts(user.id));
+  }, [dispatch, user.id]);
+
   return (
     <>
       <MDBModal
@@ -21,104 +36,19 @@ export default function UserPosts({scrollableModal, setScrollableModal}) {
         <MDBModalDialog scrollable>
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle>Modal title</MDBModalTitle>
-              {/* <MDBBtn
-                className="btn-close"
-                color="none"
-                onClick={() => setScrollableModal(!scrollableModal)}
-              ></MDBBtn> */}
+              <MDBModalTitle>{user.name} posts</MDBModalTitle>
             </MDBModalHeader>
             <MDBModalBody>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo
-                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                risus, porta ac consectetur ac, vestibulum at eros.
-              </p>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
-                dolor auctor.
-              </p>
-              <p>
-                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-                cursus magna, vel scelerisque nisl consectetur et. Donec sed
-                odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-              </p>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo
-                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                risus, porta ac consectetur ac, vestibulum at eros.
-              </p>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
-                dolor auctor.
-              </p>
-              <p>
-                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-                cursus magna, vel scelerisque nisl consectetur et. Donec sed
-                odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-              </p>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo
-                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                risus, porta ac consectetur ac, vestibulum at eros.
-              </p>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
-                dolor auctor.
-              </p>
-              <p>
-                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-                cursus magna, vel scelerisque nisl consectetur et. Donec sed
-                odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-              </p>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo
-                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                risus, porta ac consectetur ac, vestibulum at eros.
-              </p>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
-                dolor auctor.
-              </p>
-              <p>
-                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-                cursus magna, vel scelerisque nisl consectetur et. Donec sed
-                odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-              </p>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo
-                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                risus, porta ac consectetur ac, vestibulum at eros.
-              </p>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
-                dolor auctor.
-              </p>
-              <p>
-                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-                cursus magna, vel scelerisque nisl consectetur et. Donec sed
-                odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-              </p>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo
-                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                risus, porta ac consectetur ac, vestibulum at eros.
-              </p>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
-                dolor auctor.
-              </p>
-              <p>
-                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-                cursus magna, vel scelerisque nisl consectetur et. Donec sed
-                odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-              </p>
+              {isLoadingPosts ? (
+                <Spinner />
+              ) : (
+                userPosts.map((post) => (
+                  <>
+                    <h4>{post.title}</h4>
+                    <p>{post.body}</p>
+                  </>
+                ))
+              )}
             </MDBModalBody>
             <MDBModalFooter>
               <MDBBtn

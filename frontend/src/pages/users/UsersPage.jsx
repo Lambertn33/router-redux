@@ -3,14 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../store/users/users-slice";
 
 import UserItem from "../../components/UserItem";
-import { MDBCol, MDBSpinner } from "mdb-react-ui-kit";
+import Spinner from "../../components/Spinner";
+import { MDBCol } from "mdb-react-ui-kit";
 import MainWrapper from "../../components/MainWrapper";
 
 import { authActions } from "../../store/auth/auth-slice";
 import { returnUserFromToken } from "../../util/auth";
 
 export default function UsersPage() {
-  const { isLoading, users } = useSelector((state) => state.users);
+  const { isLoadingUsers, users } = useSelector((state) => state.users);
   const authenticatedUser = returnUserFromToken();
   const dispatch = useDispatch();
 
@@ -22,12 +23,8 @@ export default function UsersPage() {
   }, [dispatch, users.length, authenticatedUser]);
   return (
     <MainWrapper>
-      {isLoading ? (
-        <div className="d-flex align-items-center justify-content-center">
-          <MDBSpinner role="status">
-            <span className="visually-hidden">Loading...</span>
-          </MDBSpinner>
-        </div>
+      {isLoadingUsers ? (
+          <Spinner />
       ) : (
         <React.Fragment>
           <h4 className="text-center mt-4">Users List</h4>

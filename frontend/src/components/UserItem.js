@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
-import styles from "./UserItem.module.css";
 import { MDBCardTitle, MDBCardText, MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 import UserPosts from "../pages/users/UserPosts";
+import styles from "./UserItem.module.css";
 
 export default function UserItem({ user }) {
   const [scrollableModal, setScrollableModal] = useState(false);
@@ -32,7 +32,13 @@ export default function UserItem({ user }) {
           </MDBBtn>
         </div>
       </Card>
-      { scrollableModal && <UserPosts scrollableModal={scrollableModal} setScrollableModal={setScrollableModal} /> }
+      {scrollableModal && (
+        <UserPosts
+          user={user}
+          scrollableModal={scrollableModal}
+          setScrollableModal={setScrollableModal}
+        />
+      )}
     </>
   );
 }
