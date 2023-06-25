@@ -8,9 +8,7 @@ button {
     margin: 1rem auto;
 }
 .actions {
-    display: flex;
-    align-items: center;
-    gap: 0.125rem;
+    margin-top: 1rem;
 }
 
 a {

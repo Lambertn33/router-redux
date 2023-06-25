@@ -8,7 +8,6 @@ import {
   MDBModalTitle,
   MDBModalBody,
   MDBModalFooter,
-  MDBSpinner,
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPosts } from "../../store/users/users-slice";

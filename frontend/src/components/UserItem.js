@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Card from "./Card";
-import { Link } from "react-router-dom";
 import { MDBCardTitle, MDBCardText, MDBIcon, MDBBtn } from "mdb-react-ui-kit";
 import UserPosts from "../pages/users/UserPosts";
 import styles from "./UserItem.module.css";
@@ -26,7 +25,6 @@ export default function UserItem({ user }) {
           </MDBCardText>
         </div>
         <div className={styles.actions}>
-          <Link to="">View Details</Link>
           <MDBBtn onClick={() => setScrollableModal(!scrollableModal)}>
             View posts
           </MDBBtn>
